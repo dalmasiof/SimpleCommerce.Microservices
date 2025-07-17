@@ -12,7 +12,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Customer.Application\Customer.Application.csproj" />
     <ProjectReference Include="..\Customer.Infra\Customer.Infra.csproj" />
+    <ProjectReference Include="..\Sharedkernel\Sharedkernel.csproj" />
   </ItemGroup>
 
 </Project>

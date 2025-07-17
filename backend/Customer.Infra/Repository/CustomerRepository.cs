@@ -1,34 +1,48 @@
-﻿using Customer.Domain.Interfaces;
-using Customer.Infra.Context;
+﻿using Customer.Infra.Context;
+using Customer.Infra.Migrations;
 using Microsoft.EntityFrameworkCore;
 
-namespace Customer.Infra.Repository
+public class CustomerRepository : ICustomerRepository
 {
-    public class CustomerRepository : ICustomerRepository
+    private readonly CustomerDbContext _context;
+
+    public CustomerRepository(CustomerDbContext context)
     {
-        private readonly CustomerDbContext _context;
+        _context = context;
+    }
 
-        public CustomerRepository(CustomerDbContext context)
-        {
-            _context = context;
-        }
 
-        public async Task<Domain.Entities.Customer>Create(Domain.Entities.Customer entity)
-        {
-            _context.Add(entity);
-            await _context.SaveChangesAsync();
+    public async Task<Customer.Domain.Entities.Customer> Create(Customer.Domain.Entities.Customer entity)
+    {
+        await _context.AddAsync(entity);
+        await _context.SaveChangesAsync();
+        return entity;
+    }
 
-            return entity;
-        }
+    public async Task<bool> Delete(Guid id)
+    {
+        var entity = await _context.Customers.Where(x=>x.Id == id).FirstOrDefaultAsync();
+        if (entity == null) return false;
 
-        public async Task<Domain.Entities.Customer> Get(Guid guid)
-        {
-            return await _context.Customers.Where(x=>x.Id == guid).FirstOrDefaultAsync();
-        }
+        _context.Remove(entity);
+        await _context.SaveChangesAsync();
+        return true;
+    }
 
-        public async Task<IList<Domain.Entities.Customer>> Get()
-        {
-            return await _context.Customers.ToListAsync();
-        }
+    public async Task<IList<Customer.Domain.Entities.Customer>> GetAll()
+    {
+        return await _context.Customers.AsNoTracking().ToListAsync();
+    }
+
+    public async Task<Customer.Domain.Entities.Customer> GetById(Guid id)
+    {
+        return await _context.Customers.Where(x => x.Id == id).FirstOrDefaultAsync();
+    }
+
+    public async Task<Customer.Domain.Entities.Customer> Update(Customer.Domain.Entities.Customer entity)
+    {
+        _context.Update(entity);
+        await _context.SaveChangesAsync();
+        return entity;
     }
 }
