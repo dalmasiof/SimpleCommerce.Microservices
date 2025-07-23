@@ -1,9 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Purchase.Infra.Context;
+using Purchase.Infra.Interfaces;
 
 namespace Purchase.Infra.Repositories
 {
-    public class PurchaseRepository
+    public class PurchaseRepository : IPurchaseRepository
     {
         private readonly PurchaseContext _context;
 

@@ -7,11 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Map\" />
-    <Folder Include="Services\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\Purchase.Domain\Purchase.Domain.csproj" />
+    <ProjectReference Include="..\Purchase.Infra\Purchase.Infra.csproj" />
     <ProjectReference Include="..\Sharedkernel\Sharedkernel.csproj" />
   </ItemGroup>
 
