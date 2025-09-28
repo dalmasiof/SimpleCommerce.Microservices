@@ -12,14 +12,14 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["Customer.Service/Customer.WEB.API.csproj", "Customer.Service/"]
+COPY ["Customer.Web.API/Customer.WEB.API.csproj", "Customer.Web.API/"]
 COPY ["Customer.Application/Customer.Application.csproj", "Customer.Application/"]
 COPY ["Customer.Infra/Customer.Infra.csproj", "Customer.Infra/"]
 COPY ["Customer.Domain/Customer.Domain.csproj", "Customer.Domain/"]
-COPY ["Sharedkernel/Sharedkernel.csproj", "Sharedkernel/"]
-RUN dotnet restore "./Customer.Service/Customer.WEB.API.csproj"
+COPY ["../Sharedkernel/Sharedkernel.csproj", "../Sharedkernel/"]
+RUN dotnet restore "./Customer.Web.API/Customer.WEB.API.csproj"
 COPY . .
-WORKDIR "/src/Customer.Service"
+WORKDIR "/src/Customer.Web.API"
 RUN dotnet build "./Customer.WEB.API.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # This stage is used to publish the service project to be copied to the final stage
