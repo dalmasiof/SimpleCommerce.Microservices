@@ -1,5 +1,5 @@
 ﻿using Customer.Infra.Context;
-using Customer.Infra.Migrations;
+using Customer.Infra.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 public class CustomerRepository : ICustomerRepository

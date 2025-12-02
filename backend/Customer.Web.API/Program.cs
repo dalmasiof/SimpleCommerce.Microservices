@@ -2,7 +2,7 @@ using Customer.Application.Interfaces;
 using Customer.Application.Map;
 using Customer.Application.Service;
 using Customer.Infra.Context;
-using Customer.Infra.Migrations;
+using Customer.Infra.Interfaces;
 using Customer.WEB.API.Interfaces;
 using Customer.WEB.API.Map;
 using Microsoft.EntityFrameworkCore;

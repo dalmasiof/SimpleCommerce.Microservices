@@ -1,6 +1,6 @@
 ﻿using Customer.Application.Interfaces;
 using Customer.Application.Map;
-using Customer.Infra.Migrations;
+using Customer.Infra.Interfaces;
 
 namespace Customer.Application.Service
 {
